@@ -1,18 +1,6 @@
 <template>
-  <div
-    class="floor"
-    v-bind:style="{ 
-        position: 'absolute',
-  'background-position': 'center',
-  'background-repeat': 'repeat',
-  'background-size': 'cover',
-  height: '400px',
-  width: '100%',
-  top: '100px',      
-      backgroundImage: 'url(' + floor + ')',      
-      left: left + 'px'
-    }"
-  >{{thisLeft}}</div>
+  <div :style="[styles, stylesStatic]">
+  </div>
 </template>
 <script>
 import FloorBG from "@/assets/Environment/graveyard.png";
@@ -21,21 +9,37 @@ export default {
   data: function() {
     return {
       floor: FloorBG,
-      thisLeft: this.left
+      stylesStatic: {
+        position: "absolute",
+        "background-position": "center",
+        "background-repeat": "repeat",
+        "background-size": "cover",
+        height: "400px",
+        width: "100%",
+        top: "100px"
+      }
     };
   },
-  props: ["left"]
+  props:{
+      left:{
+          type:Number,
+          required:true
+      },
+      facing:{
+          type:Number,
+          required:true
+      }
+  },
+  computed: {
+    styles() {
+      return {
+        backgroundImage: "url(" + this.floor + ")",
+        left: this.left + "px"
+      }
+    }
+  }
 };
 </script>
 
 <style>
-.floor {
-  position: "absolute";
-  background-position: "center";
-  background-repeat: "repeat;";
-  background-size: "cover";
-  height: "400px";
-  width: "100%";
-  top: "100px";
-}
 </style>

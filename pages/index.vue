@@ -1,35 +1,37 @@
 <template>
   <div>
-    <div class="background1" :style="styles">
-      <Hero/>
+    <div :style="[styles,stylesStatic]">
+      <game/>
     </div>
   </div>
 </template>
 
 <script>
-import Hero from "@/components/Hero.vue";
+import Game from "@/components/Game";
 import BackGround from "@/assets/Environment/background.png";
 export default {
   components: {
-    Hero
+    Game
   },
   data: function() {
     return {
-      BG: BackGround
+      BG: BackGround,
+      stylesStatic:{
+        "background-repeat": "no-repeat",
+        "background-size": "cover",
+        "background-position": "center",
+        "background-repeat": "no-repeat;",
+        position: "absolute",
+        height: "500px",
+        width: "100%"
+      }
     };
   },
   methods: {},
   computed: {
     styles() {
       return {
-        "background-image": "url(" + this.BG + ")",
-        "background-repeat": "no-repeat",
-        "background-size": "cover",
-        position: "absolute",
-        "background-position": "center",
-        "background-repeat": "no-repeat;",
-        height: "500px",
-        width: "100%"
+        "background-image": "url(" + this.BG + ")",        
       };
     }
   }
