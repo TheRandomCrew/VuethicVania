@@ -1,45 +1,38 @@
 <template>
   <div>
-    <button @click="leftPlus">go left</button>
-    <button @click="jump">Jump</button>    
-    {{left}}
-    <div
-      v-bind:style="{ 
-      position: 'absolute', 
-      backgroundImage: 'url(' + floor + ')',
-      backgroundPosition: 'center',  
-      backgroundRepeat: 'repeat;',
-      backgroundSize: 'cover',
-      height: '400px',
-      width: '100%',
-      left: left + 'px', 
-      top: '100px', }"
-    />
-    <div class="hero">
+    <button @click="leftPlus" class="button--green">go left</button>
+    <button @click="leftMinus" class="button--green">go right</button>
+    <button @click="jump" class="button--grey">Jump</button>
+    
+    <Floor :left="left">
+    </Floor>
+      <div class="hero">
         <b-img-lazy
-          v-bind:style="{ 
-      position: 'absolute', 
-      left: '50%', 
-      top:top + 'px', 
-      fontSize: fontSize + 'px' 
-      }"
-          v-bind:src="sprite"
+          :style="{
+            position: 'absolute',
+            left: '50%',
+            top:top + 'px', 
+            fontSize: fontSize + 'px' 
+          }"
+          :src="sprite"
         />
       </div>
   </div>
 </template>
 
 <script>
-import Floor from "../assets/Environment/graveyard.png";
-import HeroAttack from "../assets/hero/hero-attack.gif";
-import HeroIdle from "../assets/hero/hero-idle.gif";
-import HeroJump from "../assets/hero/hero-jump.gif";
-import HeroRun from "../assets/hero/hero-run.gif";
+import Floor from "@/components/Floor";
+import HeroAttack from "@/assets/hero/hero-attack.gif";
+import HeroIdle from "@/assets/hero/hero-idle.gif";
+import HeroJump from "@/assets/hero/hero-jump.gif";
+import HeroRun from "@/assets/hero/hero-run.gif";
 
 export default {
+  components: {
+    Floor
+  },
   data: function() {
     return {
-      floor: Floor,
       sprite: HeroIdle,
       fontSize: 30,
       left: 80,
@@ -54,7 +47,7 @@ export default {
       const self = this;
       this.idle();
     },
-    rightPlus: function() {
+    leftMinus: function() {
       const lastLeft = this.left;
       this.left = lastLeft + 10;
       this.idle();
@@ -77,3 +70,9 @@ export default {
   }
 };
 </script>
+<style>
+.hero {
+  position: "absolute";
+  left: "50%";
+}
+</style>
